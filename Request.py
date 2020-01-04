@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from DataPayload import login_data, payload
+import re
 
 
 def get_table():
@@ -21,19 +22,23 @@ class Request:
         self.table = get_table()
         self.rows = self.table.find_all('tr')
         self.headers = self.get_headers()
-
-    def get_data_text(self):
-        for data_text in self.get_data():
-            yield data_text
-
-    def get_data(self):
-        for data in self.get_row():
-            yield data
-
-    def get_row(self):
-        for row in self.rows:
-            yield row
+        self.print_data_list()
 
     def get_headers(self):
         for row in self.rows:
             return row.find_all('th')
+
+    def print_data_list(self):
+        tmp_list = []
+        data_list = []
+        regex = re.compile('[\t\n]')
+
+        for row in self.rows:
+
+            for cell in row.find_all('td'):
+                tmp_list.append(regex.sub('', str(cell.text)))
+
+            data_list.append(tmp_list)
+            tmp_list = []
+        data_list.pop(0)
+        print(data_list)

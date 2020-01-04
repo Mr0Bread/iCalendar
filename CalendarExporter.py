@@ -3,6 +3,7 @@ import pickle
 from os.path import isfile
 from googleapiclient.discovery import build
 from datetime import timedelta, datetime
+from Request import Request
 
 
 def create_credentials():
@@ -23,8 +24,7 @@ class CalendarExporter:
         self.setup_oauth()
         self.get_calendar()
         self.calendar_id = self.get_calendar_id()
-        self.get_events()
-        self.create_event()
+        self.request = Request()
 
     def setup_oauth(self):
         credentials = create_credentials()

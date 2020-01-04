@@ -1,10 +1,8 @@
-from JSONExporter import JSONExporter
 from CalendarExporter import CalendarExporter
 
 
-class Main(JSONExporter, CalendarExporter):
+class Main:
     def __init__(self):
-        super().__init__()
         self.calendar_exporter = CalendarExporter()
 
 
