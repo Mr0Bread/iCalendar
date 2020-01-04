@@ -22,13 +22,12 @@ class Request:
         self.table = get_table()
         self.rows = self.table.find_all('tr')
         self.headers = self.get_headers()
-        self.print_data_list()
-
+        print(self.get_data_list())
     def get_headers(self):
         for row in self.rows:
             return row.find_all('th')
 
-    def print_data_list(self):
+    def get_data_list(self):
         tmp_list = []
         data_list = []
         regex = re.compile('[\t\n]')
@@ -40,5 +39,7 @@ class Request:
 
             data_list.append(tmp_list)
             tmp_list = []
+
         data_list.pop(0)
-        print(data_list)
+
+        return data_list

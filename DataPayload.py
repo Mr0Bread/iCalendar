@@ -1,3 +1,6 @@
+from datetime import datetime
+from TimeGetter import get_day, get_month, get_year
+
 login_data = {
         'username': 'st75084',
         'password': 'Elishka1Love'
@@ -6,9 +9,9 @@ login_data = {
 payload = {
         'AfterForm': '1',
         'idSession': 'c3704d48a250ad3b6f39e03eb92ce529',
-        'dt1': '3',
-        'mn1': '01',
-        'yr1': '2020',
+        'dt1': get_day(),
+        'mn1': get_month(),
+        'yr1': get_year(),
         'dt2': '20',
         'mn2': '01',
         'yr2': '2020',
