@@ -22,7 +22,7 @@ class Request:
         self.table = get_table()
         self.rows = self.table.find_all('tr')
         self.headers = self.get_headers()
-        print(self.get_data_list())
+
     def get_headers(self):
         for row in self.rows:
             return row.find_all('th')
