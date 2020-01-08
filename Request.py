@@ -27,9 +27,9 @@ class Request:
         for row in self.rows:
             return row.find_all('th')
 
-    def get_data_list(self):
+    def get_lesson_list(self):
         tmp_list = []
-        data_list = []
+        lesson_list = []
         regex = re.compile('[\t\n]')
 
         for row in self.rows:
@@ -37,9 +37,9 @@ class Request:
             for cell in row.find_all('td'):
                 tmp_list.append(regex.sub('', str(cell.text)))
 
-            data_list.append(tmp_list)
+            lesson_list.append(tmp_list)
             tmp_list = []
 
-        data_list.pop(0)
+        lesson_list.pop(0)
 
-        return data_list
+        return lesson_list
