@@ -43,3 +43,6 @@ class Request:
         lesson_list.pop(0)
 
         return lesson_list
+
+    def update_schedule(self):
+        self.rows = get_table().find_all('tr')

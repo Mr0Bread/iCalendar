@@ -4,6 +4,7 @@ from os.path import isfile
 from googleapiclient.discovery import build
 from datetime import timedelta, datetime
 from Request import Request
+from time import sleep
 import json
 
 TSI = 'Институт транспорта и связи, Lomonosova iela 1, Latgales priekšpilsēta, Rīga, LV-1019, Латвия'
@@ -98,7 +99,7 @@ class CalendarExporter:
         self.request = Request()
         self.fill_calendar()
         self.export_events_from_calendar_to_json()
-        self.compare_events()
+        self.update_calendar()
 
     def setup_oauth(self):
         credentials = create_credentials()
@@ -134,5 +135,11 @@ class CalendarExporter:
         except IndexError:
             return True
 
-    def compare_events(self):
-        pass
+    def update_calendar(self):
+        while True:
+            self.request.update_schedule()
+            sleep(3600)
+            self.clear_calendar()
+            self.fill_calendar()
+
+
