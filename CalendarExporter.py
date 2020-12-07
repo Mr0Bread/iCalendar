@@ -7,7 +7,7 @@ from Request import Request
 from time import sleep
 import json
 
-TSI = 'Институт транспорта и связи, Lomonosova iela 1, Latgales priekšpilsēta, Rīga, LV-1019, Латвия'
+TSI_Location = 'Институт транспорта и связи, Lomonosova iela 1, Latgales priekšpilsēta, Rīga, LV-1019, Латвия'
 
 
 def create_credentials():
@@ -71,7 +71,7 @@ def get_event_body(lesson_data):
 
     return {
         'summary': title,
-        'location': TSI,
+        'location': TSI_Location,
         'description': description,
         'start': {
             'dateTime': start_time,
@@ -97,9 +97,6 @@ class CalendarExporter:
         self.get_calendar()
         self.calendar_id = self.get_calendar_id()
         self.request = Request()
-        self.fill_calendar()
-        self.export_events_from_calendar_to_json()
-        self.update_calendar()
 
     def setup_oauth(self):
         credentials = create_credentials()
@@ -136,10 +133,6 @@ class CalendarExporter:
             return True
 
     def update_calendar(self):
-        while True:
-            self.request.update_schedule()
-            sleep(3600)
-            self.clear_calendar()
-            self.fill_calendar()
-
-
+        self.request.update_schedule()
+        self.clear_calendar()
+        self.fill_calendar()
